@@ -5,6 +5,7 @@
     <vendor>linzihao97</vendor>
 
     <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.java</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.github.linzihao97.plugindemo.services.MyApplicationService"/>
@@ -17,9 +18,12 @@
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
     <actions>
-        <action id="com.example.linzihao97.plugindemo.action.BasicAction" class="com.example.linzihao97.plugindemo.action.BasicAction"
+        <action id="com.example.linzihao97.plugindemo.action.BasicAction"
+                class="com.example.linzihao97.plugindemo.action.BasicAction"
                 text="basic" description="basic">
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
+        <action id="com.example.linzihao97.plugindemo.psi.PsiAction"
+                class="com.example.linzihao97.plugindemo.psi.PsiAction" text="psi"/>
     </actions>
 </idea-plugin>
