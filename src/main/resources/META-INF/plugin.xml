@@ -9,10 +9,17 @@
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.github.linzihao97.plugindemo.services.MyApplicationService"/>
         <projectService serviceImplementation="com.github.linzihao97.plugindemo.services.MyProjectService"/>
+        <toolWindow id="myToolWindow" factoryClass="com.example.linzihao97.plugindemo.toolwindow.MyToolWindowFactory"/>
     </extensions>
 
     <applicationListeners>
         <listener class="com.github.linzihao97.plugindemo.listeners.MyProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
+    <actions>
+        <action id="com.example.linzihao97.plugindemo.action.BasicAction" class="com.example.linzihao97.plugindemo.action.BasicAction"
+                text="basic" description="basic">
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+        </action>
+    </actions>
 </idea-plugin>
