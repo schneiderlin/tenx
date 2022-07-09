@@ -1,6 +1,5 @@
 package com.example.linzihao97.plugindemo.codegen;
 
-import com.intellij.openapi.util.text.StringUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;

@@ -42,6 +42,15 @@
                          enabledByDefault="true"
                          level="WARNING"
                          implementationClass="com.example.linzihao97.plugindemo.inspection.ComparingReferencesInspection"/>
+
+        <intentionAction>
+            <category>SDK intentions</category>
+            <className>com.example.linzihao97.plugindemo.intension.ConditionalOperatorConverter</className>
+        </intentionAction>
+        <intentionAction>
+            <category>SDK intentions</category>
+            <className>com.example.linzihao97.plugindemo.intension.GenIntention</className>
+        </intentionAction>
     </extensions>
 
     <applicationListeners>
