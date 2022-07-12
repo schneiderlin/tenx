@@ -12,6 +12,8 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
+
 @NonNls
 public class GenIntention extends PsiElementBaseIntentionAction implements IntentionAction {
 
@@ -31,14 +33,19 @@ public class GenIntention extends PsiElementBaseIntentionAction implements Inten
         }
 
         PsiElement parent = element.getParent();
-        boolean result = parent instanceof PsiClass;
-        System.out.println(parent);
-        System.out.println(result);
-        return result;
+        return parent instanceof PsiClass;
     }
 
     public void invoke(@NotNull Project project, Editor editor, @NotNull PsiElement element)
             throws IncorrectOperationException {
+        PsiClass psiClass = PsiTreeUtil.getParentOfType(element, PsiClass.class, false);
+        Arrays.stream(psiClass.getAllFields())
+                .map(psiField -> {
+                    String fieldName = psiField.getName();
+                    String fieldTypeName = psiField.getType().getCanonicalText();
+
+                    return 1;
+                });
         System.out.println("generate");
     }
 
