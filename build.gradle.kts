@@ -22,6 +22,9 @@ version = properties("pluginVersion")
 // Configure project's dependencies
 repositories {
     mavenCentral()
+    maven {
+        url = uri("https://clojars.org/repo/")
+    }
 }
 
 dependencies {
@@ -29,6 +32,14 @@ dependencies {
     implementation("com.github.javaparser:javaparser-core:3.24.2")
     // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
     implementation("org.apache.commons:commons-lang3:3.12.0")
+    // https://mvnrepository.com/artifact/nrepl/nrepl
+    implementation("nrepl:nrepl:0.9.0")
+    // https://mvnrepository.com/artifact/org.clojure/clojure
+    implementation("org.clojure:clojure:1.10.0")
+    // https://mvnrepository.com/artifact/org.clojure/tools.nrepl
+    implementation("org.clojure:tools.nrepl:0.2.12")
+    // https://mvnrepository.com/artifact/cider/cider-nrepl
+    implementation("cider:cider-nrepl:0.18.0")
 }
 
 // Configure Gradle IntelliJ Plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
