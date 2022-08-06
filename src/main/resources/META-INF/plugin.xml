@@ -42,6 +42,15 @@
         <intentionAction>
             <className>com.example.linzihao97.plugindemo.runcode.GenImportCode</className>
         </intentionAction>
+        <fileType
+                name="Simple File"
+                implementationClass="com.example.linzihao97.plugindemo.simpleLang.SimpleFileType"
+                fieldName="INSTANCE"
+                language="Simple"
+                extensions="simple"/>
+        <lang.parserDefinition
+                language="Simple"
+                implementationClass="com.example.linzihao97.plugindemo.simpleLang.SimpleParserDefinition"/>
     </extensions>
 
     <applicationListeners>
