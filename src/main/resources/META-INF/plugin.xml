@@ -6,6 +6,7 @@
 
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.java</depends>
+    <depends>Git4Idea</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.github.linzihao97.plugindemo.services.MyApplicationService"/>
@@ -42,6 +43,9 @@
         <intentionAction>
             <className>com.example.linzihao97.plugindemo.runcode.GenImportCode</className>
         </intentionAction>
+        <intentionAction>
+            <className>com.example.linzihao97.plugindemo.findEntry.FindEntryIntention</className>
+        </intentionAction>
         <fileType
                 name="Simple File"
                 implementationClass="com.example.linzihao97.plugindemo.simpleLang.SimpleFileType"
@@ -51,6 +55,8 @@
         <lang.parserDefinition
                 language="Simple"
                 implementationClass="com.example.linzihao97.plugindemo.simpleLang.SimpleParserDefinition"/>
+<!--        <codeInsight.lineMarkerProvider language="JAVA"-->
+<!--                                        implementationClass="com.example.linzihao97.plugindemo.reference.SomeProvider"/>-->
     </extensions>
 
     <applicationListeners>
