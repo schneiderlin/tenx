@@ -8,6 +8,10 @@ import com.intellij.openapi.vcs.VcsActions;
 import com.intellij.openapi.vcs.annotate.FileAnnotation;
 import com.intellij.openapi.vcs.annotate.LineAnnotationAspect;
 import com.intellij.openapi.vcs.history.VcsRevisionDescription;
+import git4idea.GitUtil;
+import git4idea.annotate.GitFileAnnotation;
+import git4idea.repo.GitRepositoryFiles;
+import git4idea.repo.GitRepositoryManager;
 import org.apache.batik.gvt.flow.LineInfo;
 import org.jetbrains.annotations.NotNull;
 
@@ -25,6 +29,10 @@ public class BasicAction extends AnAction {
         // git4idea 包里面有些能用的
         //GitFileAnnotation;
         //LineInfo
+        GitUtil;
+        GitRepositoryManager;
+        GitRepositoryFiles;
+        GitFileAnnotation;
 
         System.out.println("a");
     }
