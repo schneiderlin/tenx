@@ -29,10 +29,10 @@ public class BasicAction extends AnAction {
         // git4idea 包里面有些能用的
         //GitFileAnnotation;
         //LineInfo
-        GitUtil;
-        GitRepositoryManager;
-        GitRepositoryFiles;
-        GitFileAnnotation;
+        //GitUtil;
+        //GitRepositoryManager;
+        //GitRepositoryFiles;
+        //GitFileAnnotation;
 
         System.out.println("a");
     }

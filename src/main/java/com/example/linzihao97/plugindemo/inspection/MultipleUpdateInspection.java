@@ -22,20 +22,25 @@ public class MultipleUpdateInspection extends AbstractBaseJavaLocalInspectionToo
     @Override
     public ProblemDescriptor @Nullable [] checkMethod(@NotNull PsiMethod method, @NotNull InspectionManager manager, boolean isOnTheFly) {
         Set<PsiMethod> visited = new HashSet<>();
-        Optional<PsiMethod> recursion = findRecursion(method, visited, Set.of("aggregateUpdate"));
+        Optional<PsiCallExpression> recursion = findRecursion(method, visited, Set.of("aggregateUpdate"));
 
-        return recursion
-                .map(psiMethod ->
-                        new ProblemDescriptor[]{manager.createProblemDescriptor(
-                                psiMethod,
-                                "重复调用聚合根更新",
-                                new CriQuickFix(),
-                                ProblemHighlightType.GENERIC_ERROR,
-                                isOnTheFly)})
-                .orElse(null);
+        return recursion.map(psiMethod -> new ProblemDescriptor[]{
+                manager.createProblemDescriptor(
+                        psiMethod,
+                        "重复调用聚合根更新",
+                        new CriQuickFix(),
+                        ProblemHighlightType.GENERIC_ERROR,
+                        isOnTheFly
+                )
+        }).orElse(null);
     }
 
-    private static Optional<PsiMethod> findRecursion(PsiMethod method, Set<PsiMethod> visited, Set<String> namePool) {
+    /**
+     * 调用栈中是否有递归调用 `namePool` 中的函数
+     *
+     * @return 重复的的递归调用点
+     */
+    private static Optional<PsiCallExpression> findRecursion(PsiMethod method, Set<PsiMethod> visited, Set<String> namePool) {
         visited.add(method);
         Collection<PsiCallExpression> calls = PsiTreeUtil.findChildrenOfType(method.getBody(), PsiCallExpression.class);
         for (PsiCallExpression call : calls) {
@@ -46,9 +51,9 @@ public class MultipleUpdateInspection extends AbstractBaseJavaLocalInspectionToo
                     .findAny();
 
             if (recur.isPresent()) {
-                return recur;
+                return Optional.of(call);
             }
-            Optional<PsiMethod> r = findRecursion(method1, visited, namePool);
+            Optional<PsiCallExpression> r = findRecursion(method1, visited, namePool);
             if (r.isPresent()) {
                 return r;
             }
