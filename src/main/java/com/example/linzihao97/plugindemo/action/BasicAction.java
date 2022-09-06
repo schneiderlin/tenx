@@ -1,5 +1,7 @@
 package com.example.linzihao97.plugindemo.action;
 
+import com.intellij.codeInspection.reference.RefMethod;
+import com.intellij.ide.hierarchy.call.CallHierarchyBrowser;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
@@ -21,10 +23,16 @@ public class BasicAction extends AnAction {
         System.out.println("action performed");
         Project project = e.getProject();
 
-        ProjectLevelVcsManager manager;
-        FileAnnotation fileAnnotation;
-        LineAnnotationAspect lineAnnotationAspect;
-        VcsRevisionDescription vcsRevisionDescription;
+        RefMethod refMethod;
+        //refMethod.getInReferences()
+
+        //CallHierarchyBrowser browser = new CallHierarchyBrowser(project, null);
+        //browser.addHierarchyListener();
+
+        //ProjectLevelVcsManager manager;
+        //FileAnnotation fileAnnotation;
+        //LineAnnotationAspect lineAnnotationAspect;
+        //VcsRevisionDescription vcsRevisionDescription;
 
         // git4idea 包里面有些能用的
         //GitFileAnnotation;

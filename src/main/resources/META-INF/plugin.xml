@@ -11,6 +11,7 @@
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.github.linzihao97.plugindemo.services.MyApplicationService"/>
         <projectService serviceImplementation="com.github.linzihao97.plugindemo.services.MyProjectService"/>
+        <projectService serviceImplementation="com.example.linzihao97.plugindemo.tenx.ReplClientService"/>
 <!--        <toolWindow id="myToolWindow" factoryClass="com.example.linzihao97.plugindemo.toolwindow.MyToolWindowFactory"/>-->
         -->
         <localInspection language="JAVA"
@@ -54,11 +55,18 @@
         <listener class="com.github.linzihao97.plugindemo.listeners.MyProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationService serviceImplementation="org.intellij.sdk.maxOpenProjects.ProjectCountingService"/>
+    </extensions>
     <actions>
         <action id="com.example.linzihao97.plugindemo.action.BasicAction"
                 class="com.example.linzihao97.plugindemo.action.BasicAction"
                 text="basic" description="basic">
             <add-to-group group-id="ToolsMenu" anchor="first"/>
+        </action>
+        <action id="com.example.linzihao97.plugindemo.tenx.StartClientAction"
+                class="com.example.linzihao97.plugindemo.tenx.StartClientAction" text="Start REPL Client">
+            <add-to-group group-id="ExternalSystemView.ActionsToolbar.CenterPanel" anchor="first"/>
         </action>
     </actions>
 </idea-plugin>

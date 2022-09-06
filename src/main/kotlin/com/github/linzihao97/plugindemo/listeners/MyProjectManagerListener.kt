@@ -9,5 +9,6 @@ internal class MyProjectManagerListener : ProjectManagerListener {
 
     override fun projectOpened(project: Project) {
         project.service<MyProjectService>()
+
     }
 }

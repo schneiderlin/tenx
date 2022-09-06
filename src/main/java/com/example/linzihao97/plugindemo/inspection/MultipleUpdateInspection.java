@@ -35,6 +35,14 @@ public class MultipleUpdateInspection extends AbstractBaseJavaLocalInspectionToo
         }).orElse(null);
     }
 
+    private void a() {
+        b();
+    }
+
+    private void b() {
+        a();
+    }
+
     /**
      * 调用栈中是否有递归调用 `namePool` 中的函数
      *
