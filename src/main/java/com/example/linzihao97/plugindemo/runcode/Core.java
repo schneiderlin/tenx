@@ -2,6 +2,7 @@ package com.example.linzihao97.plugindemo.runcode;
 
 import com.example.linzihao97.plugindemo.Utils;
 import com.example.linzihao97.plugindemo.utils.PsiUtils;
+import com.google.gson.Gson;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.lang.jvm.JvmModifier;
 import com.intellij.lang.jvm.JvmNamedElement;
@@ -16,6 +17,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -25,15 +27,15 @@ public class Core {
         return "(def " + varName + " (R/getBean " + psiClass.getQualifiedName() + "))";
     }
 
-    public static String methodCallCode(PsiMethod method, Optional<String> varName) {
+    public static String methodCallCode(PsiMethod method, Optional<String> varName, Map<String, Object> params) {
         if (PsiUtils.isStatic(method)) {
-            return staticMethodCall(method);
+            return staticMethodCall(method, params);
         } else {
-            return instanceMethodCall(method, varName.orElseThrow());
+            return instanceMethodCall(method, varName.orElseThrow(), params);
         }
     }
 
-    private static String staticMethodCall(PsiMethod method) {
+    private static String staticMethodCall(PsiMethod method, Map<String, Object> params) {
         PsiClass psiClass = PsiTreeUtil.getParentOfType(method, PsiClass.class);
         String methodName = psiClass.getName() + "/" + method.getName();
 
@@ -42,7 +44,8 @@ public class Core {
         StringBuilder codeBuilder = new StringBuilder();
         codeBuilder.append("(" + methodName + " ");
         Utils.forEachWithIndex(parameterNames, (arg, i) -> {
-            codeBuilder.append(arg);
+            Object paramValue = params.get(arg);
+            codeBuilder.append(paramValue);
             if (i != parameterNames.size() - 1) {
                 codeBuilder.append(" ");
             }
@@ -66,7 +69,7 @@ public class Core {
         return codeBuilder.toString();
     }
 
-    private static String instanceMethodCall(PsiMethod method, String varName) {
+    private static String instanceMethodCall(PsiMethod method, String varName, Map<String, Object> params) {
         String methodName = "." + method.getName();
         Stream<JvmParameter> parameters = Arrays.stream(method.getParameters());
         List<String> parameterNames = parameters.map(JvmNamedElement::getName).collect(Collectors.toList());
@@ -75,7 +78,8 @@ public class Core {
         codeBuilder.append("(" + methodName + " ");
         codeBuilder.append(varName + " ");
         Utils.forEachWithIndex(parameterNames, (arg, i) -> {
-            codeBuilder.append(arg);
+            Object paramValue = params.get(arg);
+            codeBuilder.append(paramValue);
             if (i != parameterNames.size() - 1) {
                 codeBuilder.append(" ");
             }

@@ -12,6 +12,7 @@ import java.awt.*;
 
 public class TextAreaDialog extends DialogWrapper {
     private final ContentPanel contentPanel;
+    private Runnable okAction;
 
     public TextAreaDialog(Project project, String text) {
         super(project);
@@ -21,6 +22,20 @@ public class TextAreaDialog extends DialogWrapper {
         getOKAction().putValue(Action.NAME, "Create");
     }
 
+    public void setOkAction(Runnable runnable) {
+        okAction = runnable;
+    }
+
+    public String getText() {
+        return contentPanel.getText();
+    }
+
+    @Override
+    protected void doOKAction() {
+        okAction.run();
+        super.doOKAction();
+    }
+
     @Override
     protected @Nullable JComponent createCenterPanel() {
         return contentPanel;
@@ -28,6 +43,10 @@ public class TextAreaDialog extends DialogWrapper {
 
     private static class ContentPanel extends JBPanel<ContentPanel> {
         final JBTextArea textArea;
+
+        public String getText() {
+            return textArea.getText();
+        }
 
         public ContentPanel(String text) {
             super(new GridBagLayout());

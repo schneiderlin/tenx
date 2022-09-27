@@ -13,6 +13,7 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Map;
 import java.util.Optional;
 
 @NonNls
@@ -41,7 +42,7 @@ public class CallMethodIntention extends PsiElementBaseIntentionAction implement
             throws IncorrectOperationException {
         PsiMethod method = PsiTreeUtil.getParentOfType(element, PsiMethod.class);
         assert method != null;
-        String methodCallCode = Core.methodCallCode(method, Optional.empty());
+        String methodCallCode = Core.methodCallCode(method, Optional.empty(), Map.of());
 
         TextAreaDialog dialog = new TextAreaDialog(project, methodCallCode);
         dialog.show();
