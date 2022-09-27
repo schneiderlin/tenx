@@ -47,8 +47,9 @@
         <intentionAction>
             <className>com.example.linzihao97.plugindemo.findEntry.FindEntryIntention</className>
         </intentionAction>
-<!--        <codeInsight.lineMarkerProvider language="JAVA"-->
-<!--                                        implementationClass="com.example.linzihao97.plugindemo.reference.SomeProvider"/>-->
+        <intentionAction>
+            <className>com.example.linzihao97.plugindemo.tenx.CallIntention</className>
+        </intentionAction>
     </extensions>
 
     <applicationListeners>

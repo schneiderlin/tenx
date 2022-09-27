@@ -1,5 +1,6 @@
 package com.example.linzihao97.plugindemo.utils;
 
+import com.intellij.lang.jvm.JvmModifier;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.*;
 import com.intellij.psi.search.GlobalSearchScope;
@@ -22,6 +23,14 @@ public class PsiUtils {
         return Arrays.stream(method.getModifierList().getAnnotations())
                 .anyMatch(psiAnnotation ->
                         psiAnnotation.hasQualifiedName(annotationQualifiedName));
+    }
+
+    public static boolean isStatic(PsiMethod method) {
+        return method.hasModifier(JvmModifier.STATIC);
+    }
+
+    public static PsiClass getDeclaringClass(PsiMethod method) {
+        return (PsiClass) method.getParent();
     }
 
     public static Optional<List<PsiMethod>> findMethodsByName(Project project, String className, String methodName) {
