@@ -3,11 +3,13 @@ package com.example.linzihao97.plugindemo.tenx;
 import clojure.lang.RT;
 import clojure.lang.Var;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.function.Supplier;
 
 public class ReplClient {
     public static Object evalClient(String code) {
-        return eval("(eval-client \"" + code.replace("\"", "\\\"") + "\")");
+        return eval("(eval-client \"" + Base64.getEncoder().encodeToString(code.getBytes(StandardCharsets.UTF_8)) + "\")");
     }
 
     private static Var var(String varName) {
@@ -33,7 +35,13 @@ public class ReplClient {
                 eval("(def conn (nrepl/connect :port " + port + "))");
                 eval("(def timeout 3000)");
                 eval("(def client (nrepl/client conn timeout))");
-                eval("(defn eval-client [code]\n     (let [msg (nrepl/message client {:op \"eval\" :code code})\n           values (nrepl/response-values msg)]\n       (first values)))");
+                eval("(import java.util.Base64)");
+                eval("(defn decode [to-decode]\n" +
+                        "  (String. (.decode (Base64/getDecoder) to-decode)))");
+                eval("(defn eval-client [code]\n     " +
+                        "(let [msg (nrepl/message client {:op \"eval\" :code (decode code)})\n" +
+                        "      values (nrepl/response-values msg)]\n       " +
+                        "  (first values)))");
             });
             replThread.setName("Nrepl-Service-Client");
             replThread.start();

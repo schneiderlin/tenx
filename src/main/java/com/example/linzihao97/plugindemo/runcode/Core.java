@@ -2,9 +2,7 @@ package com.example.linzihao97.plugindemo.runcode;
 
 import com.example.linzihao97.plugindemo.Utils;
 import com.example.linzihao97.plugindemo.utils.PsiUtils;
-import com.google.gson.Gson;
 import com.intellij.codeInspection.ProblemsHolder;
-import com.intellij.lang.jvm.JvmModifier;
 import com.intellij.lang.jvm.JvmNamedElement;
 import com.intellij.lang.jvm.JvmParameter;
 import com.intellij.psi.PsiClass;
@@ -33,6 +31,47 @@ public class Core {
         } else {
             return instanceMethodCall(method, varName.orElseThrow(), params);
         }
+    }
+
+    public static String callWithJsonCode(String className, String methodName, List<String> argNames, List<String> argClassNames, String json) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("(call-with-json ");
+        sb.append("\"");
+        sb.append(className);
+        sb.append("\" ");
+
+        sb.append("\"");
+        sb.append(methodName);
+        sb.append("\" ");
+
+        sb.append("[");
+        if (!argNames.isEmpty()) {
+            argNames.forEach(argName -> {
+                sb.append("\"");
+                sb.append(argName);
+                sb.append("\"");
+                sb.append(" ");
+            });
+        }
+        sb.append("] ");
+
+        sb.append("[");
+        if (!argClassNames.isEmpty()) {
+            argClassNames.forEach(argClassName -> {
+                sb.append("\"");
+                sb.append(argClassName);
+                sb.append("\"");
+                sb.append(" ");
+            });
+        }
+        sb.append("] ");
+
+        sb.append("\"");
+        sb.append(json.replace("\"", "\\\""));
+        sb.append("\"");
+
+        sb.append(")");
+        return sb.toString();
     }
 
     private static String staticMethodCall(PsiMethod method, Map<String, Object> params) {

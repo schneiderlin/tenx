@@ -1,9 +1,11 @@
 package com.example.linzihao97.plugindemo.tenx;
 
 import com.example.linzihao97.plugindemo.TextAreaDialog;
+import com.example.linzihao97.plugindemo.runcode.Core;
 import com.example.linzihao97.plugindemo.utils.PsiUtils;
 import com.intellij.codeInsight.intention.IntentionAction;
 import com.intellij.codeInsight.intention.PsiElementBaseIntentionAction;
+import com.intellij.lang.jvm.JvmNamedElement;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.*;
@@ -14,9 +16,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @NonNls
 public class CallIntention extends PsiElementBaseIntentionAction implements IntentionAction {
@@ -58,26 +59,35 @@ public class CallIntention extends PsiElementBaseIntentionAction implements Inte
                 String canonicalText = parameter.getType().getCanonicalText();
                 parameterTypes.add(canonicalText);
             }
+            List<String> parameterNames = Arrays.stream(method.getParameters())
+                    .map(JvmNamedElement::getName)
+                    .collect(Collectors.toList());
 
-//            String varName = Core.to_kebab_case(psiClass.getName());
-//            String defCode = Core.getBeanCode(psiClass, varName);
-//            String methodCallCode = Core.methodCallCode(method, Optional.of(varName), params);
-//
-//            ReplClient.evalClient("(import repl.R)");
-//            ReplClient.evalClient(defCode);
-//            ReplClient.evalClient(methodCallCode);
+            //{"along": 42, "aint": 1}
+            // 初始化代码
+            ReplClient.evalClient("(import repl.R)");
+            ReplClient.evalClient("(defn bean-by-class-name [class-name]\n" +
+                    "  (let [class (Class/forName class-name)]\n" +
+                    "    (R/getBean class)))");
+            ReplClient.evalClient("(defn class-str->class [class-str]\n" +
+                    "  (cond (= class-str \"long\") Long/TYPE\n" +
+                    "        (= class-str \"int\") Integer/TYPE\n" +
+                    "        :else (Class/forName class-str)))");
+            ReplClient.evalClient("(defn call-with-json [class-name method-name arg-names arg-class-names json]\n" +
+                    "  (let [instance (bean-by-class-name class-name)\n" +
+                    "        arg-classes (map #(class-str->class %) arg-class-names)]\n" +
+                    "    (R/callMethod\n" +
+                    "           instance\n" +
+                    "           method-name\n" +
+                    "           arg-names\n" +
+                    "           arg-classes\n" +
+                    "           json)))");
+
+            ReplClient.evalClient(Core.callWithJsonCode(className, methodName, parameterNames, parameterTypes, content));
         });
         dialog.show();
         System.out.println(1);
     }
-
-//    private Map<String, Class> toJabaClass(PsiType psiType) {
-//        GlobalSearchScope scope = GlobalSearchScope.projectScope(project);
-//        JavaPsiFacade javaPsiFacade = JavaPsiFacade.getInstance(project);
-//        String parameterType = method.getParameterList().getParameter(0).getType().getCanonicalText();
-//        PsiClass userClass = javaPsiFacade.findClass(parameterType, scope);
-//        String canonicalText = userClass.getFields()[0].getType().getCanonicalText();
-//    }
 
     public boolean startInWriteAction() {
         return false;
