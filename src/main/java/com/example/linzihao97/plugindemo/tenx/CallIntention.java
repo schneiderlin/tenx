@@ -47,7 +47,7 @@ public class CallIntention extends PsiElementBaseIntentionAction implements Inte
         assert method != null;
         PsiClass psiClass = PsiUtils.getDeclaringClass(method);
 
-        TextAreaDialog dialog = new TextAreaDialog(project, "{}");
+        TextAreaDialog dialog = new TextAreaDialog(project, "Generate call code","{}");
         dialog.setOkAction(() -> {
             String content = dialog.getText();
             String className = psiClass.getQualifiedName();
@@ -63,7 +63,6 @@ public class CallIntention extends PsiElementBaseIntentionAction implements Inte
                     .map(JvmNamedElement::getName)
                     .collect(Collectors.toList());
 
-            //{"along": 42, "aint": 1}
             // 初始化代码
             ReplClient.evalClient("(import repl.R)");
             ReplClient.evalClient("(defn bean-by-class-name [class-name]\n" +
@@ -86,7 +85,6 @@ public class CallIntention extends PsiElementBaseIntentionAction implements Inte
             ReplClient.evalClient(Core.callWithJsonCode(className, methodName, parameterNames, parameterTypes, content));
         });
         dialog.show();
-        System.out.println(1);
     }
 
     public boolean startInWriteAction() {

@@ -39,7 +39,7 @@ public class GenCodeIntention extends PsiElementBaseIntentionAction implements I
         PsiClass psiClass = (PsiClass) element.getParent();
         String createCode = Core.createCode(psiClass);
 
-        TextAreaDialog dialog = new TextAreaDialog(project, createCode);
+        TextAreaDialog dialog = new TextAreaDialog(project, "Generate dto code", createCode);
         dialog.show();
     }
 

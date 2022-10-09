@@ -44,7 +44,7 @@ public class CallMethodIntention extends PsiElementBaseIntentionAction implement
         assert method != null;
         String methodCallCode = Core.methodCallCode(method, Optional.empty(), Map.of());
 
-        TextAreaDialog dialog = new TextAreaDialog(project, methodCallCode);
+        TextAreaDialog dialog = new TextAreaDialog(project, "Call this method with json argument", methodCallCode);
         dialog.show();
     }
 

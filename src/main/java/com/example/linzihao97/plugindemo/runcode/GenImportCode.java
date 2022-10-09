@@ -42,7 +42,7 @@ public class GenImportCode extends PsiElementBaseIntentionAction implements Inte
         assert psiClass != null;
         String code = Core.importCode(psiClass);
 
-        TextAreaDialog dialog = new TextAreaDialog(project, code);
+        TextAreaDialog dialog = new TextAreaDialog(project, "Generate import code", code);
         dialog.show();
     }
 

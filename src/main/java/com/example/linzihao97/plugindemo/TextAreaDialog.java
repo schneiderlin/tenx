@@ -14,12 +14,12 @@ public class TextAreaDialog extends DialogWrapper {
     private final ContentPanel contentPanel;
     private Runnable okAction;
 
-    public TextAreaDialog(Project project, String text) {
+    public TextAreaDialog(Project project, String title, String text) {
         super(project);
-        setTitle("Import Fields From DTO");
+        setTitle(title);
         contentPanel = new ContentPanel(text);
         init();
-        getOKAction().putValue(Action.NAME, "Create");
+        getOKAction().putValue(Action.NAME, "Ok");
     }
 
     public void setOkAction(Runnable runnable) {

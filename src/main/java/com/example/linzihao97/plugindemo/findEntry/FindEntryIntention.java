@@ -56,7 +56,7 @@ public class FindEntryIntention extends PsiElementBaseIntentionAction implements
                 .map(PsiMethod::getName)
                 .collect(Collectors.joining("\n"));
 
-        TextAreaDialog dialog = new TextAreaDialog(project, result);
+        TextAreaDialog dialog = new TextAreaDialog(project, "Import Fields From DTO", result);
         dialog.show();
     }
 
