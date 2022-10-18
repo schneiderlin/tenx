@@ -10,8 +10,14 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.github.linzihao97.plugindemo.services.MyApplicationService"/>
+        <projectConfigurable parentId="tools" instance="com.example.linzihao97.plugindemo.settings.AnyDoorSettingsConfigurable"
+                                 id="com.example.linzihao97.plugindemo.settings.AnyDoorSettingsConfigurable"
+                                 displayName="Settings Any Door" nonDefaultProject="true"/>
+        <projectService
+                serviceImplementation="com.example.linzihao97.plugindemo.settings.AayDoorSettingsState"/>
         <projectService serviceImplementation="com.github.linzihao97.plugindemo.services.MyProjectService"/>
         <projectService serviceImplementation="com.example.linzihao97.plugindemo.tenx.ReplClientService"/>
+<!--        <projectService serviceImplementation="com.example.linzihao97.plugindemo."-->
 <!--        <toolWindow id="myToolWindow" factoryClass="com.example.linzihao97.plugindemo.toolwindow.MyToolWindowFactory"/>-->
 <!--        &ndash;&gt;-->
 <!--        <localInspection language="JAVA"-->
@@ -50,7 +56,24 @@
         <intentionAction>
             <className>com.example.linzihao97.plugindemo.tenx.CallIntention</className>
         </intentionAction>
+        <intentionAction>
+            <className>com.example.linzihao97.plugindemo.anydoor.AnyDoorIntention</className>
+        </intentionAction>
+<!--        <httpRequestHandler implementation="com.example.linzihao97.plugindemo.anydoor.RestServiceImpl"/>-->
+
+<!--        <httpRequestHandler implementation="org.jetbrains.ide.RestService"/>-->
     </extensions>
+
+<!--    <extensions defaultExtensionNs="org.jetbrains">-->
+<!--&lt;!&ndash;        <customPortServerManager implementation="com.example.linzihao97.plugindemo.anydoor.CustomPortServerManagerBaseImpl"/>&ndash;&gt;-->
+
+<!--&lt;!&ndash;        <webServerPathHandler implementation="org.jetbrains.builtInWebServer.DefaultWebServerPathHandler" order="last"/>&ndash;&gt;-->
+<!--&lt;!&ndash;        <webServerFileHandler implementation="org.jetbrains.builtInWebServer.StaticFileHandler" order="last"/>&ndash;&gt;-->
+<!--&lt;!&ndash;        <webServerRootsProvider implementation="org.jetbrains.builtInWebServer.DefaultWebServerRootsProvider"/>&ndash;&gt;-->
+
+<!--&lt;!&ndash;        <binaryRequestHandler implementation="org.jetbrains.io.jsonRpc.socket.RpcBinaryRequestHandler"/>&ndash;&gt;-->
+<!--    </extensions>-->
+
 
     <applicationListeners>
         <listener class="com.github.linzihao97.plugindemo.listeners.MyProjectManagerListener"
@@ -70,4 +93,8 @@
             <add-to-group group-id="ExternalSystemView.ActionsToolbar.CenterPanel" anchor="first"/>
         </action>
     </actions>
+
+<!--    <extensionPoints>-->
+<!--        <extensionPoint name="httpRequestHandler" interface="org.jetbrains.ide.HttpRequestHandler" dynamic="true"/>-->
+<!--    </extensionPoints>-->
 </idea-plugin>
