@@ -99,8 +99,6 @@ public class AnyDoorIntention extends PsiElementBaseIntentionAction implements I
 //        }
 //    }
 
-    private static final CloseableHttpClient httpClient = HttpClients.createDefault();
-
     /*
      *  POST请求
      *  参数是：URL，jsonObject(请求参数封装成json对象)
@@ -108,7 +106,7 @@ public class AnyDoorIntention extends PsiElementBaseIntentionAction implements I
      * */
     public static String post(String url, String body) {
         //创建HttpClients对象
-
+        CloseableHttpClient httpClient = HttpClients.createDefault();
         //创建post请求对象
         HttpPost httpPost = new HttpPost(url);
         //创建封装请求参数对象，设置post请求参数
@@ -126,6 +124,13 @@ public class AnyDoorIntention extends PsiElementBaseIntentionAction implements I
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+        } finally {
+            if (httpClient != null) {
+                try {
+                    httpClient.close();
+                } catch (IOException e) {
+                }
+            }
         }
         return null;
     }
