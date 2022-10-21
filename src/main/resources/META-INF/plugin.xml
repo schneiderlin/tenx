@@ -57,14 +57,18 @@
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="org.intellij.sdk.maxOpenProjects.ProjectCountingService"/>
+        <applicationService serviceImplementation="com.example.linzihao97.plugindemo.tenx.MyNotifier"/>
+        <notificationGroup id="Tenx"
+                           displayType="BALLOON"
+                           key="tenx.error"/>
     </extensions>
     <actions>
-<!--        <action id="com.example.linzihao97.plugindemo.action.BasicAction"-->
-<!--                class="com.example.linzihao97.plugindemo.action.BasicAction"-->
-<!--                text="basic" description="basic">-->
-<!--            <add-to-group group-id="ToolsMenu" anchor="first"/>-->
-<!--        </action>-->
+        <action id="com.example.linzihao97.plugindemo.action.BasicAction"
+                class="com.example.linzihao97.plugindemo.action.BasicAction"
+                text="basic" description="basic">
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+        </action>
+
         <action id="com.example.linzihao97.plugindemo.tenx.StartClientAction"
                 class="com.example.linzihao97.plugindemo.tenx.StartClientAction" text="Start REPL Client">
             <add-to-group group-id="ExternalSystemView.ActionsToolbar.CenterPanel" anchor="first"/>
