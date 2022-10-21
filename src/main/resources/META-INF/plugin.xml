@@ -69,9 +69,9 @@
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
 
-        <action id="com.example.linzihao97.plugindemo.tenx.StartClientAction"
-                class="com.example.linzihao97.plugindemo.tenx.StartClientAction" text="Start REPL Client">
-            <add-to-group group-id="ExternalSystemView.ActionsToolbar.CenterPanel" anchor="first"/>
-        </action>
+<!--        <action id="com.example.linzihao97.plugindemo.tenx.StartClientAction"-->
+<!--                class="com.example.linzihao97.plugindemo.tenx.StartClientAction" text="Start REPL Client">-->
+<!--            <add-to-group group-id="ExternalSystemView.ActionsToolbar.CenterPanel" anchor="first"/>-->
+<!--        </action>-->
     </actions>
 </idea-plugin>
