@@ -33,7 +33,11 @@ public class Core {
         }
     }
 
-    public static String callWithJsonCode(String className, String methodName, List<String> argNames, List<String> argClassNames, String json) {
+    public static String callWithJsonCode(String className,
+                                          String methodName,
+                                          List<String> argNames,
+                                          List<String> argClassNames,
+                                          String json) {
         StringBuilder sb = new StringBuilder();
         sb.append("(call-with-json ");
         sb.append("\"");
