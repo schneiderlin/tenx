@@ -47,7 +47,7 @@ public class CallIntention extends PsiElementBaseIntentionAction implements Inte
         assert method != null;
         PsiClass psiClass = PsiUtils.getDeclaringClass(method);
 
-        TextAreaDialog dialog = new TextAreaDialog(project, "Generate call code","{}");
+        TextAreaDialog dialog = new TextAreaDialog(project, "Generate call code","{\"key\": \"value\"}");
         dialog.setOkAction(() -> {
             try {
                 String content = dialog.getText();
