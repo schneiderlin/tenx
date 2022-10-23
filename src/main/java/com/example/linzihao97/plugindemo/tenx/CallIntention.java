@@ -3,6 +3,9 @@ package com.example.linzihao97.plugindemo.tenx;
 import com.example.linzihao97.plugindemo.TextAreaDialog;
 import com.example.linzihao97.plugindemo.runcode.Core;
 import com.example.linzihao97.plugindemo.utils.PsiUtils;
+import com.google.gson.Gson;
+import com.google.gson.JsonNull;
+import com.google.gson.JsonObject;
 import com.intellij.codeInsight.intention.IntentionAction;
 import com.intellij.codeInsight.intention.PsiElementBaseIntentionAction;
 import com.intellij.lang.jvm.JvmNamedElement;
@@ -21,6 +24,8 @@ import java.util.stream.Collectors;
 
 @NonNls
 public class CallIntention extends PsiElementBaseIntentionAction implements IntentionAction {
+
+    private static final Gson gson = new Gson();
 
     @NotNull
     public String getText() {
@@ -47,23 +52,31 @@ public class CallIntention extends PsiElementBaseIntentionAction implements Inte
         assert method != null;
         PsiClass psiClass = PsiUtils.getDeclaringClass(method);
 
-        TextAreaDialog dialog = new TextAreaDialog(project, "Generate call code","{\"key\": \"value\"}");
+        // 获取静态信息
+        String className = psiClass.getQualifiedName();
+        String methodName = method.getName();
+        PsiParameterList parameterList = method.getParameterList();
+        List<String> parameterTypes = new ArrayList<>();
+        for (int i = 0; i < parameterList.getParametersCount(); i++) {
+            PsiParameter parameter = Objects.requireNonNull(parameterList.getParameter(i));
+            String canonicalText = parameter.getType().getCanonicalText();
+            parameterTypes.add(canonicalText);
+        }
+        List<String> parameterNames = Arrays.stream(method.getParameters())
+                .map(JvmNamedElement::getName)
+                .collect(Collectors.toList());
+
+        // 生成默认的 json
+        JsonObject jsonObject = new JsonObject();
+        parameterNames.forEach(name -> {
+            jsonObject.add(name, JsonNull.INSTANCE);
+        });
+        String placeHolder = jsonObject.toString();
+
+        TextAreaDialog dialog = new TextAreaDialog(project, "Generate call code",placeHolder);
         dialog.setOkAction(() -> {
             try {
                 String content = dialog.getText();
-                String className = psiClass.getQualifiedName();
-                String methodName = method.getName();
-                List<String> parameterTypes = new ArrayList<>();
-                PsiParameterList parameterList = method.getParameterList();
-                for (int i = 0; i < parameterList.getParametersCount(); i++) {
-                    PsiParameter parameter = Objects.requireNonNull(parameterList.getParameter(i));
-                    String canonicalText = parameter.getType().getCanonicalText();
-                    parameterTypes.add(canonicalText);
-                }
-                List<String> parameterNames = Arrays.stream(method.getParameters())
-                        .map(JvmNamedElement::getName)
-                        .collect(Collectors.toList());
-
                 // 初始化代码
                 ReplClient.evalClient("(import repl.R)");
                 ReplClient.evalClient("(defn bean-by-class-name [class-name]\n" +
