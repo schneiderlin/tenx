@@ -4,6 +4,7 @@ import com.example.linzihao97.plugindemo.TextAreaDialog;
 import com.example.linzihao97.plugindemo.runcode.Core;
 import com.example.linzihao97.plugindemo.utils.PsiUtils;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.intellij.codeInsight.intention.IntentionAction;
@@ -71,9 +72,14 @@ public class CallIntention extends PsiElementBaseIntentionAction implements Inte
         parameterNames.forEach(name -> {
             jsonObject.add(name, JsonNull.INSTANCE);
         });
-        String placeHolder = jsonObject.toString();
+        Gson gson1 = new GsonBuilder()
+                .setPrettyPrinting()
+                .serializeNulls()
+                .create();
+        String placeHolder = gson1
+                .toJson(jsonObject);
 
-        TextAreaDialog dialog = new TextAreaDialog(project, "Generate call code",placeHolder);
+        TextAreaDialog dialog = new TextAreaDialog(project, "Generate call code", placeHolder);
         dialog.setOkAction(() -> {
             try {
                 String content = dialog.getText();
