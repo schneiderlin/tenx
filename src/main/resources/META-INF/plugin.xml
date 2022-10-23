@@ -1,4 +1,3 @@
-<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <id>com.github.linzihao97.plugindemo</id>
     <name>tenx-plugin</name>
@@ -12,41 +11,6 @@
         <applicationService serviceImplementation="com.github.linzihao97.plugindemo.services.MyApplicationService"/>
         <projectService serviceImplementation="com.github.linzihao97.plugindemo.services.MyProjectService"/>
         <projectService serviceImplementation="com.example.linzihao97.plugindemo.tenx.ReplClientService"/>
-<!--        <toolWindow id="myToolWindow" factoryClass="com.example.linzihao97.plugindemo.toolwindow.MyToolWindowFactory"/>-->
-<!--        &ndash;&gt;-->
-<!--        <localInspection language="JAVA"-->
-<!--                         displayName="SDK: '==' or '!=' used instead of 'equals()'"-->
-<!--                         groupPath="Java"-->
-<!--                         groupBundle="messages.InspectionsBundle"-->
-<!--                         groupKey="group.names.probable.bugs"-->
-<!--                         enabledByDefault="true"-->
-<!--                         level="WARNING"-->
-<!--                         implementationClass="com.example.linzihao97.plugindemo.inspection.ComparingReferencesInspection"/>-->
-<!--        <localInspection language="JAVA"-->
-<!--                         displayName="SDK: multiple aggregate update"-->
-<!--                         groupPath="Java"-->
-<!--                         groupBundle="messages.InspectionsBundle"-->
-<!--                         groupKey="group.names.probable.bugs"-->
-<!--                         enabledByDefault="true"-->
-<!--                         level="ERROR"-->
-<!--                         implementationClass="com.example.linzihao97.plugindemo.inspection.MultipleUpdateInspection"/>-->
-
-<!--        <intentionAction>-->
-<!--            <category>SDK intentions</category>-->
-<!--            <className>com.example.linzihao97.plugindemo.intension.ConditionalOperatorConverter</className>-->
-<!--        </intentionAction>-->
-<!--        <intentionAction>-->
-<!--            <className>com.example.linzihao97.plugindemo.runcode.GenCodeIntention</className>-->
-<!--        </intentionAction>-->
-<!--        <intentionAction>-->
-<!--            <className>com.example.linzihao97.plugindemo.runcode.CallMethodIntention</className>-->
-<!--        </intentionAction>-->
-<!--        <intentionAction>-->
-<!--            <className>com.example.linzihao97.plugindemo.runcode.GenImportCode</className>-->
-<!--        </intentionAction>-->
-<!--        <intentionAction>-->
-<!--            <className>com.example.linzihao97.plugindemo.findEntry.FindEntryIntention</className>-->
-<!--        </intentionAction>-->
         <intentionAction>
             <className>com.example.linzihao97.plugindemo.tenx.CallIntention</className>
         </intentionAction>
@@ -63,15 +27,9 @@
                            key="tenx.error"/>
     </extensions>
     <actions>
-        <action id="com.example.linzihao97.plugindemo.action.BasicAction"
-                class="com.example.linzihao97.plugindemo.action.BasicAction"
-                text="basic" description="basic">
-            <add-to-group group-id="ToolsMenu" anchor="first"/>
+        <action id="com.example.linzihao97.plugindemo.tenx.StartClientAction"
+                class="com.example.linzihao97.plugindemo.tenx.StartClientAction" text="Start REPL Client">
+            <add-to-group group-id="ExternalSystemView.ActionsToolbar.CenterPanel" anchor="first"/>
         </action>
-
-<!--        <action id="com.example.linzihao97.plugindemo.tenx.StartClientAction"-->
-<!--                class="com.example.linzihao97.plugindemo.tenx.StartClientAction" text="Start REPL Client">-->
-<!--            <add-to-group group-id="ExternalSystemView.ActionsToolbar.CenterPanel" anchor="first"/>-->
-<!--        </action>-->
     </actions>
 </idea-plugin>
