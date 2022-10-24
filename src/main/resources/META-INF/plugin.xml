@@ -1,7 +1,6 @@
-<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <id>com.github.linzihao97.plugindemo</id>
-    <name>plugin-demo</name>
+    <name>tenx-plugin</name>
     <vendor>linzihao97</vendor>
 
     <depends>com.intellij.modules.platform</depends>
@@ -17,84 +16,28 @@
                 serviceImplementation="com.example.linzihao97.plugindemo.settings.AayDoorSettingsState"/>
         <projectService serviceImplementation="com.github.linzihao97.plugindemo.services.MyProjectService"/>
         <projectService serviceImplementation="com.example.linzihao97.plugindemo.tenx.ReplClientService"/>
-<!--        <projectService serviceImplementation="com.example.linzihao97.plugindemo."-->
-<!--        <toolWindow id="myToolWindow" factoryClass="com.example.linzihao97.plugindemo.toolwindow.MyToolWindowFactory"/>-->
-<!--        &ndash;&gt;-->
-<!--        <localInspection language="JAVA"-->
-<!--                         displayName="SDK: '==' or '!=' used instead of 'equals()'"-->
-<!--                         groupPath="Java"-->
-<!--                         groupBundle="messages.InspectionsBundle"-->
-<!--                         groupKey="group.names.probable.bugs"-->
-<!--                         enabledByDefault="true"-->
-<!--                         level="WARNING"-->
-<!--                         implementationClass="com.example.linzihao97.plugindemo.inspection.ComparingReferencesInspection"/>-->
-<!--        <localInspection language="JAVA"-->
-<!--                         displayName="SDK: multiple aggregate update"-->
-<!--                         groupPath="Java"-->
-<!--                         groupBundle="messages.InspectionsBundle"-->
-<!--                         groupKey="group.names.probable.bugs"-->
-<!--                         enabledByDefault="true"-->
-<!--                         level="ERROR"-->
-<!--                         implementationClass="com.example.linzihao97.plugindemo.inspection.MultipleUpdateInspection"/>-->
-
-<!--        <intentionAction>-->
-<!--            <category>SDK intentions</category>-->
-<!--            <className>com.example.linzihao97.plugindemo.intension.ConditionalOperatorConverter</className>-->
-<!--        </intentionAction>-->
-<!--        <intentionAction>-->
-<!--            <className>com.example.linzihao97.plugindemo.runcode.GenCodeIntention</className>-->
-<!--        </intentionAction>-->
-<!--        <intentionAction>-->
-<!--            <className>com.example.linzihao97.plugindemo.runcode.CallMethodIntention</className>-->
-<!--        </intentionAction>-->
-<!--        <intentionAction>-->
-<!--            <className>com.example.linzihao97.plugindemo.runcode.GenImportCode</className>-->
-<!--        </intentionAction>-->
-<!--        <intentionAction>-->
-<!--            <className>com.example.linzihao97.plugindemo.findEntry.FindEntryIntention</className>-->
-<!--        </intentionAction>-->
         <intentionAction>
             <className>com.example.linzihao97.plugindemo.tenx.CallIntention</className>
         </intentionAction>
         <intentionAction>
             <className>com.example.linzihao97.plugindemo.anydoor.AnyDoorIntention</className>
         </intentionAction>
-<!--        <httpRequestHandler implementation="com.example.linzihao97.plugindemo.anydoor.RestServiceImpl"/>-->
-
-<!--        <httpRequestHandler implementation="org.jetbrains.ide.RestService"/>-->
     </extensions>
-
-<!--    <extensions defaultExtensionNs="org.jetbrains">-->
-<!--&lt;!&ndash;        <customPortServerManager implementation="com.example.linzihao97.plugindemo.anydoor.CustomPortServerManagerBaseImpl"/>&ndash;&gt;-->
-
-<!--&lt;!&ndash;        <webServerPathHandler implementation="org.jetbrains.builtInWebServer.DefaultWebServerPathHandler" order="last"/>&ndash;&gt;-->
-<!--&lt;!&ndash;        <webServerFileHandler implementation="org.jetbrains.builtInWebServer.StaticFileHandler" order="last"/>&ndash;&gt;-->
-<!--&lt;!&ndash;        <webServerRootsProvider implementation="org.jetbrains.builtInWebServer.DefaultWebServerRootsProvider"/>&ndash;&gt;-->
-
-<!--&lt;!&ndash;        <binaryRequestHandler implementation="org.jetbrains.io.jsonRpc.socket.RpcBinaryRequestHandler"/>&ndash;&gt;-->
-<!--    </extensions>-->
-
 
     <applicationListeners>
         <listener class="com.github.linzihao97.plugindemo.listeners.MyProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="org.intellij.sdk.maxOpenProjects.ProjectCountingService"/>
+        <applicationService serviceImplementation="com.example.linzihao97.plugindemo.tenx.MyNotifier"/>
+        <notificationGroup id="Tenx"
+                           displayType="BALLOON"
+                           key="tenx.error"/>
     </extensions>
     <actions>
-<!--        <action id="com.example.linzihao97.plugindemo.action.BasicAction"-->
-<!--                class="com.example.linzihao97.plugindemo.action.BasicAction"-->
-<!--                text="basic" description="basic">-->
-<!--            <add-to-group group-id="ToolsMenu" anchor="first"/>-->
-<!--        </action>-->
         <action id="com.example.linzihao97.plugindemo.tenx.StartClientAction"
                 class="com.example.linzihao97.plugindemo.tenx.StartClientAction" text="Start REPL Client">
             <add-to-group group-id="ExternalSystemView.ActionsToolbar.CenterPanel" anchor="first"/>
         </action>
     </actions>
-
-<!--    <extensionPoints>-->
-<!--        <extensionPoint name="httpRequestHandler" interface="org.jetbrains.ide.HttpRequestHandler" dynamic="true"/>-->
-<!--    </extensionPoints>-->
 </idea-plugin>

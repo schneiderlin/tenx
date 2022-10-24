@@ -1,5 +1,6 @@
 package com.example.linzihao97.plugindemo.action;
 
+import com.example.linzihao97.plugindemo.tenx.MyNotifier;
 import com.intellij.codeInspection.reference.RefMethod;
 import com.intellij.ide.hierarchy.call.CallHierarchyBrowser;
 import com.intellij.openapi.actionSystem.AnAction;
@@ -41,7 +42,6 @@ public class BasicAction extends AnAction {
         //GitRepositoryManager;
         //GitRepositoryFiles;
         //GitFileAnnotation;
-
-        System.out.println("a");
+        MyNotifier.notifyError(project, "error, haha");
     }
 }

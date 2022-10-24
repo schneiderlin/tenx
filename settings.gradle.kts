@@ -1,1 +1,1 @@
-rootProject.name = "plugin-demo"
+rootProject.name = "tenx-plugin"

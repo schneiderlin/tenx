@@ -28,6 +28,11 @@ public class ReplClient {
         return (T) READ_STRING.invoke(s);
     }
 
+    private Thread.UncaughtExceptionHandler h = (th, ex) -> {
+        String msg = "start repl client Exception: " + ex.getMessage();
+        MyNotifier.notifyError(null, msg);
+    };
+
     public void start(int port) {
         using(() -> {
             Thread replThread = new Thread(() -> {
@@ -44,6 +49,7 @@ public class ReplClient {
                         "  (first values)))");
             });
             replThread.setName("Nrepl-Service-Client");
+            replThread.setUncaughtExceptionHandler(h);
             replThread.start();
             return null;
         });
