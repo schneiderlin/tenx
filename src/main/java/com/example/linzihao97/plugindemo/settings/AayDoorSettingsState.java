@@ -21,6 +21,8 @@ import org.jetbrains.annotations.Nullable;
 public class AayDoorSettingsState implements PersistentStateComponent<AayDoorSettingsState> {
 
   public Integer port = 8080;
+  public Boolean enable = true;
+  public String version = "0.0.1";
 //  public boolean ideaStatus = false;
 
 //  public static AppSettingsState getInstance() {

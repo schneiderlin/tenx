@@ -46,8 +46,10 @@ public class AnyDoorSettingsConfigurable implements Configurable {
   public boolean isModified() {
 //    AppSettingsState settings = AppSettingsState.getInstance();
     AayDoorSettingsState settings = project.getService(AayDoorSettingsState.class);
-    //    modified |= mySettingsComponent.getIdeaUserStatus() != settings.ideaStatus;
-    return !mySettingsComponent.getAnyDoorPortText().equals(String.valueOf(settings.port));
+    return !mySettingsComponent.getAnyDoorPortText().equals(String.valueOf(settings.port)) ||
+            !mySettingsComponent.getVersionText().equals(settings.version) ||
+            !mySettingsComponent.getEnableAnyDoorBox().equals(settings.enable)
+            ;
   }
 
   @Override
@@ -55,14 +57,17 @@ public class AnyDoorSettingsConfigurable implements Configurable {
     AayDoorSettingsState settings = project.getService(AayDoorSettingsState.class);
     String anyDoorPortText = mySettingsComponent.getAnyDoorPortText();
     settings.port = NumberUtils.toInt(anyDoorPortText, settings.port);
-//    settings.ideaStatus = mySettingsComponent.getIdeaUserStatus();
+
+    settings.enable = mySettingsComponent.getEnableAnyDoorBox();
+    settings.version = mySettingsComponent.getVersionText();
   }
 
   @Override
   public void reset() {
     AayDoorSettingsState settings = project.getService(AayDoorSettingsState.class);
     mySettingsComponent.setAnyDoorPortText(String.valueOf(settings.port));
-//    mySettingsComponent.setIdeaUserStatus(settings.ideaStatus);
+    mySettingsComponent.setEnableAnyDoorBox(settings.enable);
+    mySettingsComponent.setVersionText(settings.version);
   }
 
   @Override
