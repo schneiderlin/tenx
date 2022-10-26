@@ -3,10 +3,10 @@ package com.example.linzihao97.plugindemo.anydoor;
 import com.example.linzihao97.plugindemo.TextAreaDialog;
 import com.example.linzihao97.plugindemo.settings.AayDoorSettingsState;
 import com.example.linzihao97.plugindemo.utils.PsiUtils;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import com.google.gson.*;
 import com.intellij.codeInsight.intention.IntentionAction;
 import com.intellij.codeInsight.intention.PsiElementBaseIntentionAction;
+import com.intellij.lang.jvm.JvmNamedElement;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.*;
@@ -24,7 +24,10 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @NonNls
 public class AnyDoorIntention extends PsiElementBaseIntentionAction implements IntentionAction {
@@ -54,12 +57,25 @@ public class AnyDoorIntention extends PsiElementBaseIntentionAction implements I
         assert method != null;
         PsiClass psiClass = PsiUtils.getDeclaringClass(method);
 
-        TextAreaDialog dialog = new TextAreaDialog(project, "Generate call code","{}");
+        List<String> parameterNames = Arrays.stream(method.getParameters())
+                .map(JvmNamedElement::getName)
+                .collect(Collectors.toList());
+
+        // 生成默认的 json
+        JsonObject jsonObject = new JsonObject();
+        parameterNames.forEach(name -> jsonObject.add(name, JsonNull.INSTANCE));
+        Gson gson1 = new GsonBuilder()
+                .setPrettyPrinting()
+                .serializeNulls()
+                .create();
+        String placeHolder = gson1.toJson(jsonObject);
+
+        TextAreaDialog dialog = new TextAreaDialog(project, "Generate call code", placeHolder);
         dialog.setOkAction(() -> {
             String content = dialog.getText();
             String className = psiClass.getQualifiedName();
             String methodName = method.getName();
-//            List<String> parameterTypes = new ArrayList<>();
+
             JsonArray parameterTypes = new JsonArray();
             PsiParameterList parameterList = method.getParameterList();
             for (int i = 0; i < parameterList.getParametersCount(); i++) {
@@ -69,14 +85,14 @@ public class AnyDoorIntention extends PsiElementBaseIntentionAction implements I
             }
             Integer port = project.getService(AayDoorSettingsState.class).port;
 
-            JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("content", content);
-            jsonObject.addProperty("methodName", methodName);
-            jsonObject.addProperty("className", className);
-            jsonObject.add("parameterTypes", parameterTypes);
+            JsonObject jsonObjectReq = new JsonObject();
+            jsonObjectReq.addProperty("content", content);
+            jsonObjectReq.addProperty("methodName", methodName);
+            jsonObjectReq.addProperty("className", className);
+            jsonObjectReq.add("parameterTypes", parameterTypes);
 
             // http 请求
-            Thread thread = new Thread(() -> post("http://127.0.0.1:" + port + "/any_door/run", jsonObject.toString()));
+            Thread thread = new Thread(() -> post("http://127.0.0.1:" + port + "/any_door/run", jsonObjectReq.toString()));
             thread.start();
 
 
