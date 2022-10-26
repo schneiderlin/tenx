@@ -15,4 +15,12 @@ public class MyNotifier {
             .notify(project);
   }
 
+  public static void notifyInfo(@Nullable Project project,
+                                 String content) {
+    NotificationGroupManager.getInstance()
+            .getNotificationGroup("Tenx")
+            .createNotification(content, NotificationType.INFORMATION)
+            .notify(project);
+  }
+
 }

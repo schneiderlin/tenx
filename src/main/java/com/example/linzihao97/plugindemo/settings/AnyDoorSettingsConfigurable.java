@@ -38,7 +38,7 @@ public class AnyDoorSettingsConfigurable implements Configurable {
   @Nullable
   @Override
   public JComponent createComponent() {
-    mySettingsComponent = new AnyDoorSettingsComponent();
+    mySettingsComponent = new AnyDoorSettingsComponent(project);
     return mySettingsComponent.getPanel();
   }
 
