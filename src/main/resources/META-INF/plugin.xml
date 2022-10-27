@@ -5,6 +5,7 @@
 
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.java</depends>
+    <depends>org.jetbrains.idea.maven</depends>
     <depends>Git4Idea</depends>
 
     <extensions defaultExtensionNs="com.intellij">
@@ -39,5 +40,8 @@
                 class="com.example.linzihao97.plugindemo.tenx.StartClientAction" text="Start REPL Client">
             <add-to-group group-id="ExternalSystemView.ActionsToolbar.CenterPanel" anchor="first"/>
         </action>
+<!--        <action id="com.example.linzihao97.plugindemo.action.RunAction" class="com.example.linzihao97.plugindemo.action.RunAction" text="run test" description="run test v me 50">-->
+<!--            <add-to-group group-id="ToolbarRunGroup" anchor="first" />-->
+<!--        </action>-->
     </actions>
 </idea-plugin>

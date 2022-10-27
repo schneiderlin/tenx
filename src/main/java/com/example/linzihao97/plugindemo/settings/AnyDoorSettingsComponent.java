@@ -2,6 +2,9 @@
 
 package com.example.linzihao97.plugindemo.settings;
 
+import com.example.linzihao97.plugindemo.anydoor.AnyDoorImportUtil;
+import com.intellij.openapi.project.Project;
+import com.intellij.ui.components.JBCheckBox;
 import com.intellij.ui.components.JBLabel;
 import com.intellij.ui.components.JBTextField;
 import com.intellij.util.ui.FormBuilder;
@@ -16,12 +19,20 @@ public class AnyDoorSettingsComponent {
 
   private final JPanel myMainPanel;
   private final JBTextField anyDoorPortText = new JBTextField();
-//  private final JBCheckBox myIdeaUserStatus = new JBCheckBox("Do you use IntelliJ IDEA? ");
+  private final JBTextField versionText = new JBTextField();
+  private final JBTextField mainClassModuleText = new JBTextField();
+  private final JBCheckBox enableAnyDoorBox = new JBCheckBox("Enable any-door");
 
-  public AnyDoorSettingsComponent() {
+  public AnyDoorSettingsComponent(Project project) {
+    JButton button = new JButton("Try import jar to RunModule");
+    button.addActionListener(e -> AnyDoorImportUtil.fillJar(project, mainClassModuleText.getText()));
+    JBLabel label = new JBLabel("Main class RunModule name:");
+    label.setToolTipText("Not required");
     myMainPanel = FormBuilder.createFormBuilder()
-            .addLabeledComponent(new JBLabel("Enter project port: "), anyDoorPortText, 1, false)
-//            .addComponent(myIdeaUserStatus, 1)
+            .addLabeledComponent(new JBLabel("Run project port:"), anyDoorPortText, 1, false)
+            .addLabeledComponent(new JBLabel("Any-door jar version:"), versionText, 1, false)
+            .addLabeledComponent(label, mainClassModuleText, 1, false)
+            .addComponent(button)
             .addComponentFillVertically(new JPanel(), 0)
             .getPanel();
   }
@@ -43,12 +54,28 @@ public class AnyDoorSettingsComponent {
     anyDoorPortText.setText(newText);
   }
 
-//  public boolean getIdeaUserStatus() {
-//    return myIdeaUserStatus.isSelected();
-//  }
-//
-//  public void setIdeaUserStatus(boolean newStatus) {
-//    myIdeaUserStatus.setSelected(newStatus);
-//  }
+  public Boolean getEnableAnyDoorBox() {
+    return enableAnyDoorBox.isSelected();
+  }
 
+  public void setEnableAnyDoorBox(boolean newStatus) {
+    enableAnyDoorBox.setSelected(newStatus);
+  }
+
+  @NotNull
+  public String getVersionText() {
+    return versionText.getText();
+  }
+
+  public void setVersionText(@NotNull String newText) {
+    versionText.setText(newText);
+  }
+
+  public void setMainClassModuleText(String text) {
+    mainClassModuleText.setText(text);
+  }
+
+  public String getMainClassModuleText() {
+    return mainClassModuleText.getText();
+  }
 }
