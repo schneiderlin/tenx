@@ -23,6 +23,7 @@ public class AayDoorSettingsState implements PersistentStateComponent<AayDoorSet
   public Integer port = 8080;
   public Boolean enable = true;
   public String version = "0.0.1";
+  public String runModule = "";
 //  public boolean ideaStatus = false;
 
 //  public static AppSettingsState getInstance() {

@@ -48,7 +48,8 @@ public class AnyDoorSettingsConfigurable implements Configurable {
     AayDoorSettingsState settings = project.getService(AayDoorSettingsState.class);
     return !mySettingsComponent.getAnyDoorPortText().equals(String.valueOf(settings.port)) ||
             !mySettingsComponent.getVersionText().equals(settings.version) ||
-            !mySettingsComponent.getEnableAnyDoorBox().equals(settings.enable)
+            !mySettingsComponent.getEnableAnyDoorBox().equals(settings.enable) ||
+            !mySettingsComponent.getMainClassModuleText().equals(settings.runModule)
             ;
   }
 
@@ -60,6 +61,7 @@ public class AnyDoorSettingsConfigurable implements Configurable {
 
     settings.enable = mySettingsComponent.getEnableAnyDoorBox();
     settings.version = mySettingsComponent.getVersionText();
+    settings.runModule = mySettingsComponent.getMainClassModuleText();
   }
 
   @Override
@@ -68,6 +70,7 @@ public class AnyDoorSettingsConfigurable implements Configurable {
     mySettingsComponent.setAnyDoorPortText(String.valueOf(settings.port));
     mySettingsComponent.setEnableAnyDoorBox(settings.enable);
     mySettingsComponent.setVersionText(settings.version);
+    mySettingsComponent.setMainClassModuleText(settings.runModule);
   }
 
   @Override
