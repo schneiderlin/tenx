@@ -104,22 +104,11 @@ public class AnyDoorIntention extends PsiElementBaseIntentionAction implements I
         return false;
     }
 
-//    private static <T> T using(Supplier<T> f) {
-//        ClassLoader oldLoader = Thread.currentThread().getContextClassLoader();
-//        try {
-//            ClassLoader loader = AnyDoorIntention.class.getClassLoader();
-//            Thread.currentThread().setContextClassLoader(loader);
-//            return f.get();
-//        } finally {
-//            Thread.currentThread().setContextClassLoader(oldLoader);
-//        }
-//    }
 
-    /*
-     *  POST请求
-     *  参数是：URL，jsonObject(请求参数封装成json对象)
-     *
-     * */
+    /**
+     * POST请求
+     * 参数是：URL，jsonObject(请求参数封装成json对象)
+     */
     public static String post(String url, String body) {
         //创建HttpClients对象
         CloseableHttpClient httpClient = HttpClients.createDefault();

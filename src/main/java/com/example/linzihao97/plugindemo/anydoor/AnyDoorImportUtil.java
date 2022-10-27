@@ -63,15 +63,6 @@ public class AnyDoorImportUtil {
 
     @SuppressWarnings("rawtypes")
     public static Module getMainModule(Project project, String runModuleName) {
-//        Object moduleObj = Optional.ofNullable(env.getDataContext()).map(o -> o.getData("module")).orElseGet(() -> {
-//            return ((ApplicationConfiguration) env.getRunProfile()).getModules()[0];
-//        });
-//        boolean b = moduleObj instanceof Module;
-//        if (!b) {
-//            throw new RuntimeException("get run module error");
-//        }
-//
-//        Module module = (Module) moduleObj;
         Module[] modules = ModuleManager.getInstance(project).getModules();
         if (StringUtils.isNotBlank(runModuleName)) {
             for (Module module : modules) {

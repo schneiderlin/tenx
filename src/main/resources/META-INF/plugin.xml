@@ -17,7 +17,6 @@
                 serviceImplementation="com.example.linzihao97.plugindemo.settings.AayDoorSettingsState"/>
         <projectService serviceImplementation="com.github.linzihao97.plugindemo.services.MyProjectService"/>
         <projectService serviceImplementation="com.example.linzihao97.plugindemo.tenx.ReplClientService"/>
-<!--        <projectService serviceImplementation="com.example.linzihao97.plugindemo.listeners.ProcessExecutionListener"/>-->
         <intentionAction>
             <className>com.example.linzihao97.plugindemo.tenx.CallIntention</className>
         </intentionAction>
@@ -30,10 +29,6 @@
         <listener class="com.github.linzihao97.plugindemo.listeners.MyProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
-<!--    <projectListeners>-->
-<!--        <listener class="com.example.linzihao97.plugindemo.listeners.ProcessExecutionListener"-->
-<!--                  topic="com.intellij.execution.ExecutionListener"/>-->
-<!--    </projectListeners>-->
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.example.linzihao97.plugindemo.tenx.MyNotifier"/>
         <notificationGroup id="Tenx"

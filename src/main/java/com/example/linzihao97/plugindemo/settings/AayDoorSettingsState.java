@@ -24,11 +24,6 @@ public class AayDoorSettingsState implements PersistentStateComponent<AayDoorSet
   public Boolean enable = true;
   public String version = "0.0.1";
   public String runModule = "";
-//  public boolean ideaStatus = false;
-
-//  public static AppSettingsState getInstance() {
-//    return ApplicationManager.getApplication().getService(AppSettingsState.class);
-//  }
 
   @Nullable
   @Override

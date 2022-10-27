@@ -44,7 +44,6 @@ public class AnyDoorSettingsConfigurable implements Configurable {
 
   @Override
   public boolean isModified() {
-//    AppSettingsState settings = AppSettingsState.getInstance();
     AayDoorSettingsState settings = project.getService(AayDoorSettingsState.class);
     return !mySettingsComponent.getAnyDoorPortText().equals(String.valueOf(settings.port)) ||
             !mySettingsComponent.getVersionText().equals(settings.version) ||
