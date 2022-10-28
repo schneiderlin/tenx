@@ -98,7 +98,7 @@ public class TextAreaDialog extends DialogWrapper {
             final long stamp = LocalTimeCounter.currentTime();
             final PsiFile psiFile = factory.createFileFromText("Dummy." + fileType.getDefaultExtension(), fileType, initText, stamp, true, false);
 
-            TextCompletionUtil.installProvider(psiFile, new MyJsonCompletionProvider(), true);
+            //TextCompletionUtil.installProvider(psiFile, new MyJsonCompletionProvider(), true);
             return PsiDocumentManager.getInstance(project).getDocument(psiFile);
         }
 
