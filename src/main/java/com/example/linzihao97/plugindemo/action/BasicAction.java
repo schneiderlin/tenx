@@ -1,6 +1,7 @@
 package com.example.linzihao97.plugindemo.action;
 
 import com.example.linzihao97.plugindemo.tenx.MyNotifier;
+import com.example.linzihao97.plugindemo.tenx.ReplClientService;
 import com.intellij.codeInspection.reference.RefMethod;
 import com.intellij.ide.hierarchy.call.CallHierarchyBrowser;
 import com.intellij.openapi.actionSystem.AnAction;
@@ -24,7 +25,10 @@ public class BasicAction extends AnAction {
         System.out.println("action performed");
         Project project = e.getProject();
 
-        RefMethod refMethod;
+        ReplClientService service = project.getService(ReplClientService.class);
+        String key1 = service.getCache("key1");
+        System.out.println(1);
+
         //refMethod.getInReferences()
 
         //CallHierarchyBrowser browser = new CallHierarchyBrowser(project, null);
@@ -42,6 +46,5 @@ public class BasicAction extends AnAction {
         //GitRepositoryManager;
         //GitRepositoryFiles;
         //GitFileAnnotation;
-        MyNotifier.notifyError(project, "error, haha");
     }
 }

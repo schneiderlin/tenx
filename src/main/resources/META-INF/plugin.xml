@@ -43,5 +43,7 @@
 <!--        <action id="com.example.linzihao97.plugindemo.action.RunAction" class="com.example.linzihao97.plugindemo.action.RunAction" text="run test" description="run test v me 50">-->
 <!--            <add-to-group group-id="ToolbarRunGroup" anchor="first" />-->
 <!--        </action>-->
+        <action id="com.example.linzihao97.plugindemo.action.BasicAction"
+                class="com.example.linzihao97.plugindemo.action.BasicAction" text="basic action"/>
     </actions>
 </idea-plugin>
