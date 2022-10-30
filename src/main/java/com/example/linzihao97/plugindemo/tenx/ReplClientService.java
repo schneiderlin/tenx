@@ -1,43 +1,43 @@
 package com.example.linzihao97.plugindemo.tenx;
 
 import com.intellij.openapi.components.PersistentStateComponent;
+import com.intellij.openapi.components.State;
+import com.intellij.openapi.components.Storage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
 import java.util.Map;
 
-public class ReplClientService implements PersistentStateComponent<Map<String, String>> {
+@State(name = "tenx", storages = @Storage("tenx.xml"))
+public class ReplClientService implements PersistentStateComponent<ReplClientService.State> {
     private final ReplClient client = new ReplClient();
-    private Map<String, String> cache;
+
+    private State state;
+
+    public static class State {
+        public Map<String, String> cache;
+    }
 
     public void start() {
         client.start(7888);
     }
 
     public void setCache(String key, String value) {
-        cache.put(key, value);
+        state.cache.put(key, value);
     }
 
     public String getCache(String key) {
-        return cache.get(key);
+        return state.cache.get(key);
     }
 
     @Override
-    public @Nullable Map<String, String> getState() {
-        return cache;
+    public @Nullable State getState() {
+        return state;
     }
 
     @Override
-    public void loadState(@NotNull Map<String, String> state) {
-        this.cache = state;
-    }
-
-    @Override
-    public void noStateLoaded() {
-        cache = Map.of(
-                "key1", "value1",
-                "key2", "value2"
-        );
-//        PersistentStateComponent.super.noStateLoaded();
+    public void loadState(@NotNull State state) {
+        this.state = state;
     }
 }

@@ -1,22 +1,9 @@
 package com.example.linzihao97.plugindemo.action;
 
-import com.example.linzihao97.plugindemo.tenx.MyNotifier;
 import com.example.linzihao97.plugindemo.tenx.ReplClientService;
-import com.intellij.codeInspection.reference.RefMethod;
-import com.intellij.ide.hierarchy.call.CallHierarchyBrowser;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vcs.ProjectLevelVcsManager;
-import com.intellij.openapi.vcs.VcsActions;
-import com.intellij.openapi.vcs.annotate.FileAnnotation;
-import com.intellij.openapi.vcs.annotate.LineAnnotationAspect;
-import com.intellij.openapi.vcs.history.VcsRevisionDescription;
-import git4idea.GitUtil;
-import git4idea.annotate.GitFileAnnotation;
-import git4idea.repo.GitRepositoryFiles;
-import git4idea.repo.GitRepositoryManager;
-import org.apache.batik.gvt.flow.LineInfo;
 import org.jetbrains.annotations.NotNull;
 
 public class BasicAction extends AnAction {
