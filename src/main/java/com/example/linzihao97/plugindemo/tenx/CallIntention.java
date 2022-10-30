@@ -67,17 +67,27 @@ public class CallIntention extends PsiElementBaseIntentionAction implements Inte
                 .map(JvmNamedElement::getName)
                 .collect(Collectors.toList());
 
-        // 生成默认的 json
-        JsonObject jsonObject = new JsonObject();
-        parameterNames.forEach(name -> {
-            jsonObject.add(name, JsonNull.INSTANCE);
-        });
-        Gson gson1 = new GsonBuilder()
-                .setPrettyPrinting()
-                .serializeNulls()
-                .create();
-        String placeHolder = gson1
-                .toJson(jsonObject);
+        // 使用上次调用的参数
+        String placeHolder;
+
+        ReplClientService service = project.getService(ReplClientService.class);
+        String cacheKey = getCacheKey(className, methodName, parameterTypes);
+        String cache = service.getCache(cacheKey);
+        if (cache != null) {
+            placeHolder = cache;
+        } else {
+            // 生成默认的 json
+            JsonObject jsonObject = new JsonObject();
+            parameterNames.forEach(name -> {
+                jsonObject.add(name, JsonNull.INSTANCE);
+            });
+            Gson gson1 = new GsonBuilder()
+                    .setPrettyPrinting()
+                    .serializeNulls()
+                    .create();
+            placeHolder = gson1
+                    .toJson(jsonObject);
+        }
 
         TextAreaDialog dialog = new TextAreaDialog(project, "Generate call code", placeHolder);
         dialog.setOkAction(() -> {
@@ -103,12 +113,19 @@ public class CallIntention extends PsiElementBaseIntentionAction implements Inte
                         "           json)))");
 
                 ReplClient.evalClient(Core.callWithJsonCode(className, methodName, parameterNames, parameterTypes, content));
+
+                // cache
+                service.setCache(cacheKey, content);
             } catch (Exception e) {
                 String msg = "Call method Exception: " + e.getMessage();
                 MyNotifier.notifyError(project, msg);
             }
         });
         dialog.show();
+    }
+
+    private static String getCacheKey(String className, String methodName, List<String> parameterTypes) {
+        return className + methodName + String.join("", parameterTypes);
     }
 
     public boolean startInWriteAction() {

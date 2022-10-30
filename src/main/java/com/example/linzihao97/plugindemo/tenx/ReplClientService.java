@@ -40,4 +40,11 @@ public class ReplClientService implements PersistentStateComponent<ReplClientSer
     public void loadState(@NotNull State state) {
         this.state = state;
     }
+
+    @Override
+    public void noStateLoaded() {
+        State state1 = new State();
+        state1.cache = new HashMap<>();
+        state = state1;
+    }
 }
