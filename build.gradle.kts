@@ -46,8 +46,6 @@ dependencies {
     implementation("org.clojure:tools.nrepl:0.2.12")
     // https://mvnrepository.com/artifact/cider/cider-nrepl
     implementation("cider:cider-nrepl:0.18.0")
-    // /Users/linzihao/.m2/repository/com/shopcider/nrepl-starter/1.0.5-SNAPSHOT/nrepl-starter-1.0.5-SNAPSHOT.pom
-//    implementation("com.shopcider:nrepl-starter:1.0.5-SNAPSHOT")
     implementation("com.google.code.gson:gson:2.9.1")
 }
 
