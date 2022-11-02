@@ -10,18 +10,10 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.github.linzihao97.plugindemo.services.MyApplicationService"/>
-        <projectConfigurable parentId="tools" instance="com.example.linzihao97.plugindemo.settings.AnyDoorSettingsConfigurable"
-                                 id="com.example.linzihao97.plugindemo.settings.AnyDoorSettingsConfigurable"
-                                 displayName="Settings Any Door" nonDefaultProject="true"/>
-        <projectService
-                serviceImplementation="com.example.linzihao97.plugindemo.settings.AayDoorSettingsState"/>
         <projectService serviceImplementation="com.github.linzihao97.plugindemo.services.MyProjectService"/>
         <projectService serviceImplementation="com.github.schneiderlin.tenx.tenx.ReplClientService"/>
         <intentionAction>
-            <className>com.example.linzihao97.plugindemo.tenx.CallIntention</className>
-        </intentionAction>
-        <intentionAction>
-            <className>com.example.linzihao97.plugindemo.anydoor.AnyDoorIntention</className>
+            <className>com.github.schneiderlin.tenx.tenx.CallIntention</className>
         </intentionAction>
     </extensions>
 
@@ -40,10 +32,5 @@
                 class="com.github.schneiderlin.tenx.tenx.StartClientAction" text="Start REPL Client">
             <add-to-group group-id="ExternalSystemView.ActionsToolbar.CenterPanel" anchor="first"/>
         </action>
-<!--        <action id="com.example.linzihao97.plugindemo.action.RunAction" class="com.example.linzihao97.plugindemo.action.RunAction" text="run test" description="run test v me 50">-->
-<!--            <add-to-group group-id="ToolbarRunGroup" anchor="first" />-->
-<!--        </action>-->
-        <action id="com.example.linzihao97.plugindemo.action.BasicAction"
-                class="com.example.linzihao97.plugindemo.action.BasicAction" text="basic action"/>
     </actions>
 </idea-plugin>
