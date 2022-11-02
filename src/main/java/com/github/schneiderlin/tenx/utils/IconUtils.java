@@ -1,4 +1,4 @@
-package com.example.linzihao97.plugindemo.utils;
+package com.github.schneiderlin.tenx.utils;
 
 import com.intellij.openapi.util.IconLoader;
 

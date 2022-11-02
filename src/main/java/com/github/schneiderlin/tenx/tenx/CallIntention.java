@@ -1,8 +1,8 @@
-package com.example.linzihao97.plugindemo.tenx;
+package com.github.schneiderlin.tenx.tenx;
 
-import com.example.linzihao97.plugindemo.TextAreaDialog;
-import com.example.linzihao97.plugindemo.runcode.Core;
-import com.example.linzihao97.plugindemo.utils.PsiUtils;
+import com.github.schneiderlin.tenx.TextAreaDialog;
+import com.github.schneiderlin.tenx.Core;
+import com.github.schneiderlin.tenx.utils.PsiUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonNull;
@@ -19,7 +19,6 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.lang.reflect.Method;
 import java.util.*;
 import java.util.stream.Collectors;
 

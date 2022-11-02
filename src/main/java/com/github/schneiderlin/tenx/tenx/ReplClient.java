@@ -1,4 +1,4 @@
-package com.example.linzihao97.plugindemo.tenx;
+package com.github.schneiderlin.tenx.tenx;
 
 import clojure.lang.RT;
 import clojure.lang.Var;

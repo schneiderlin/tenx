@@ -1,4 +1,4 @@
-package com.example.linzihao97.plugindemo;
+package com.github.schneiderlin.tenx;
 
 import com.intellij.codeInsight.completion.CompletionContributor;
 import com.intellij.codeInsight.completion.CompletionType;

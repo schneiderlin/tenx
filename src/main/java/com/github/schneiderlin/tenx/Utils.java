@@ -1,4 +1,4 @@
-package com.example.linzihao97.plugindemo;
+package com.github.schneiderlin.tenx;
 
 import java.util.ArrayList;
 import java.util.List;

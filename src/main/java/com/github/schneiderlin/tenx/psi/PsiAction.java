@@ -1,4 +1,4 @@
-package com.example.linzihao97.plugindemo.psi;
+package com.github.schneiderlin.tenx.psi;
 
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.AnAction;
