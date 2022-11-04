@@ -98,9 +98,10 @@ public class CallIntention extends PsiElementBaseIntentionAction implements Inte
                         "  (let [class (Class/forName class-name)]\n" +
                         "    (R/getBean class)))");
                 ReplClient.evalClient("(defn class-str->class [class-str]\n" +
-                        "  (cond (= class-str \"long\") Long/TYPE\n" +
-                        "        (= class-str \"int\") Integer/TYPE\n" +
-                        "        :else (Class/forName class-str)))");
+                        "  (let [removed-generic (first (clojure.string/split class-str #\"<\"))]\n" +
+                        "    (cond (= class-str \"long\") Long/TYPE\n" +
+                        "          (= class-str \"int\") Integer/TYPE\n" +
+                        "          :else (Class/forName removed-generic))))");
                 ReplClient.evalClient("(defn call-with-json [class-name method-name arg-names arg-class-names json]\n" +
                         "  (let [instance (bean-by-class-name class-name)\n" +
                         "        arg-classes (map #(class-str->class %) arg-class-names)]\n" +
